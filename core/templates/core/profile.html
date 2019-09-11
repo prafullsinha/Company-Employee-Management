@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+
+{% block content %}
+    <h1>Profile Page</h1>
+    <p>Welcome to my Site, {% if user.is_authenticated %}{{ user.username }} !!{% else %} Guest!! {% endif %}</p>
+    <form method="post">
+        {% csrf_token %}
+        <p>First Name:<input type="text" name="first_name"></p>
+        <p>Last Name:<input type="text" name="last_name"></p>
+        <p>Email:<input type="email" name="email"></p>
+        <button type="submit">Submit</button>
+
+    </form>
+
+{% endblock %}
