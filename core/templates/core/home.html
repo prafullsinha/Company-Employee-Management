@@ -3,13 +3,19 @@
 
 {% block content %}
     <h1>Home Page</h1>
-    <p>Welcome to my Site, {% if user.is_authenticated %}{{ user.username }} !!
-    <p>First Name: {{ user.first_name }} </p>
-    <p>Last Name: {{ user.last_name }} </p>
-    <p>Email: {{ user.email }} </p>
-        {% else %}
-        Guest!!
-        {% endif %}</p>
+<p>Welcome to my Site, {% if user.is_authenticated %}{{ user.username }} !!</p>
+        {% if user.first_name or user.last_name or user.email %}
+        <p>First Name: {{ user.first_name }} </p>
+        <p>Last Name: {{ user.last_name }} </p>
+        <p>Email: {{ user.email }} </p>
+            {% else %}
+        <p>Please update profile .</p>
+        {% endif %}
+            {% else %}
+            Guest!!
+        <p>Please login to see and update profile.</p>
+            {% endif %}
+
 
     <strong>Total users registered: </strong> {{ count }}
 {% endblock %}

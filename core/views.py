@@ -4,12 +4,15 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from core.forms import ProfileForm
 
-def HomeView(request):
-    count= User.objects.count()
-    context={
-        'count':count
-    }
-    return render(request,'core/home.html',context)
+class HomeView(TemplateView):
+    template_name='core/home.html'
+
+    def get(self,request):
+        count= User.objects.count()
+        context={
+            'count':count
+            }
+        return render(request,self.template_name,context)
 
 
 class ProfileView(TemplateView):
@@ -38,19 +41,23 @@ class ProfileView(TemplateView):
         return render(request, self.template_name, context)
 
 
+class Signup(TemplateView):
+    template_name='registration/signup.html'
 
+    def get(self,request):
+        form= UserCreationForm()
+        context={
+            'form': form
+        }
+        return render(request,self.template_name,context)
 
-
-
-def Signup(request):
-    if request.method=='POST':
+    def post(self,request,*args,**kwargs):
         form= UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('home')
-    else:
         form=UserCreationForm()
-    context={
-        'form':form
-    }
-    return render(request,'registration/signup.html',context)
+        context={
+            'form':form
+        }
+        return render(request,self.template_name,context)

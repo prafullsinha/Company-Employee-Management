@@ -1,10 +1,8 @@
-from core.views import ProfileView
+from core.views import ProfileView,HomeView,Signup
 from django.urls import path
-from . import views
-from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('',views.HomeView,name='home'),
-    path('signup/',views.Signup,name='signup'),
+    path('',HomeView.as_view(),name='home'),
+    path('signup/',Signup.as_view(),name='signup'),
     path('profile/',ProfileView.as_view(),name="profile"),
 ]
