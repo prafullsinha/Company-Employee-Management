@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+
+
+{% block content %}
+    <h2>Manager View Page for {{ p.company.cname }}</h2><br><br>
+
+<div class="row justify-content-center">
+        <div class="col=6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="Container">
+                        <h4> {{ user.first_name }} Personal details!!</h4><br>
+                        <p><img src='{{ MEDIA_URL }}{{ p.picture }}' height="60" width="60"> </p>
+                        <p> Contact:  {{ p.phone }} </p>
+                        <p> Sex:  {{ p.gender }} </p>
+                        <p> Favourites:  {{ p.hobbies }} </p>
+                        <p> Company Name:  {{ p.company.cname }} </p>
+                        <p> Employee type:  {{ p.company.type }} </p>
+                        <p> Email: {{ p.company.email }} </p>
+                        <p><a href="/member/{{ p.company_id }}/" class="btn btn-primary ml-2">Edit Personal</a></p>
+                        <div class="row justify-content-center">
+        <div class="col=6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="Container">
+                        <h3>Company Member List:(click to edit )</h3>
+                            <h5>(**only if members have updated their details by login!!)</h5><br>
+                        <ol>
+                            {% for e in q %}
+                                {% if e.cname == p.company.cname and e.email != p.company.email  %}
+                                    <li>
+                                        <p>Employee Email: <a href="/member/{{ e.email }}/"> {{ e.email }} </a></p>
+                                        <p>Employee Type: {{ e.type }}</p>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<br>
+
+
+
+
+{% endblock %}
